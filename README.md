@@ -42,4 +42,11 @@ $logger = (new MyDiContainer('MY_APP_TYPE'))->get(MyLoggerWithContext::class);
 ### Running tests
 ```php
 composer test
+
+Runtime:       PHP 8.4.14
+..                                                                  2 / 2 (100%)
+
+Time: 00:00, Memory: 14.00 MB
+
+OK (2 tests, 2 assertions)
 ```
