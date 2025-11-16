@@ -10,7 +10,7 @@
 ```
 
 ### Overwrite or Map Interfaces 
-(WIP - It works, but needs to be extracted into separate config file)
+(WIP - It works, but needs to be extracted into separate config file)  
 Currently done inside the DIContainer, which you can extend if you wanted to via:
 ```php
 class MyDiContainer extends \DIContainer\DIContainer
