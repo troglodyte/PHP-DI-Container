@@ -1,4 +1,10 @@
 <?php
+
+namespace DIContainer;
+use Closure;
+use Exception;
+use ReflectionClass;
+
 /**
  * Usage:
  *  (new DIContainer())
@@ -11,7 +17,7 @@
 class DIContainer
 {
     /* example app name for use with multiple apps */
-    public const string MY_APP_TYPE= 'MY_APP_TYPE';
+    public const string MY_APP_TYPE = 'MY_APP_TYPE';
     public const string MY_APP_TYPE_LEGACY = 'MY_APP_TYPE_LEGACY';
     protected array $instances = [];
     protected string $configType;
@@ -23,16 +29,16 @@ class DIContainer
 
     /* Example mapping for interfaces, etc. todo - put in config file */
     protected const array MY_APP_TYPE_CONFIG_ONE = [
-       // \Psr\Log\LoggerInterface::class => MyPSRLogger::class,
-       // \Illuminate\Log\Logger::class => MyPSRLogger::class,
-       // \App\Caching\CachingRedisAdapter::class => MyLegacyCachingRedisAdapter::class,
+        // \Psr\Log\LoggerInterface::class => MyPSRLogger::class,
+        // \Illuminate\Log\Logger::class => MyPSRLogger::class,
+        // \App\Caching\CachingRedisAdapter::class => MyLegacyCachingRedisAdapter::class,
     ];
 
     /* Another example mapping for interfaces, etc. */
     protected const array MY_APP_TYPE_CONFIG_TWO = [
-       // \Psr\Log\LoggerInterface::class => MyLegacyPSRLogger::class,
-       // \Illuminate\Log\Logger::class => MyLegacyPSRLogger::class,
-       // \App\Caching\CachingRedisAdapter::class => MyLegacyCachingRedisAdapter::class,
+        // \Psr\Log\LoggerInterface::class => MyLegacyPSRLogger::class,
+        // \Illuminate\Log\Logger::class => MyLegacyPSRLogger::class,
+        // \App\Caching\CachingRedisAdapter::class => MyLegacyCachingRedisAdapter::class,
     ];
 
     protected function getMappingConfig(string $configType): array
@@ -67,7 +73,7 @@ class DIContainer
     /**
      * If you need to use an existing object to build a new one with existing state, pass it in via $objects
      * E.g.:
-     *    $reportingService = $diContainer->getWithExistingContext(ReportingService::class, [$logAggregator]);
+     *    $reportingService = $DIContainer->getWithExistingContext(ReportingService::class, [$logAggregator]);
      * @throws Exception
      */
     public function getWithExistingContext(string $id, array $objects = [], array $parameters = [])
@@ -116,7 +122,7 @@ class DIContainer
                 }
             } else {
                 $map = [];
-                array_map(function($obj) use (&$map) {
+                array_map(function ($obj) use (&$map) {
                     $map[get_class($obj)] = $obj;
                 }, $objects);
                 $dependencies[] = empty($map[$dependencyType->getName()]) ? $this->get($dependencyType->getName()) : $map[$dependencyType->getName()];

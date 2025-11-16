@@ -1,6 +1,6 @@
 <?php
 
-use DIContainer;
+namespace DIContainer;
 
 trait ServiceContainerTrait
 {
